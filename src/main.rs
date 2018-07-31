@@ -21,24 +21,24 @@ fn main() {
     terminal.clear().unwrap();
     terminal.hide_cursor().unwrap();
 
-    draw(&mut terminal, &size, &mut body);
+    draw(&mut terminal, &size, &body);
 
     for c in stdin.keys() {
         let key = c.unwrap();
-        if key == event::Key::Esc {
-            break;
+        match key {
+            event::Key::Esc => break,
+            event::Key::Backspace => backspace(&mut body),
+            event::Key::Char(ch) => update_text(&mut body, ch),
+            _ => {}
         }
-        if let event::Key::Char(ch) = key {
-            update_text(&mut body, ch)
-        }
-        draw(&mut terminal, &size, &mut body);
+        draw(&mut terminal, &size, &body);
     }
 
     terminal.clear().unwrap();
     terminal.show_cursor().unwrap();
 }
 
-fn draw(terminal: &mut Terminal<RawBackend>, size: &Rect, body: &mut str) {
+fn draw(terminal: &mut Terminal<RawBackend>, size: &Rect, body: &str) {
     Block::default()
         .title(&format!(" todo-rs: {}x{} ", &size.width, &size.height))
         .borders(Borders::ALL)
@@ -62,6 +62,15 @@ fn update_text(text: &mut String, ch: char) {
     text.pop();
     // Add the new character
     text.push(ch);
+    // Add the cursor again
+    text.push(CURSOR);
+}
+
+fn backspace(text: &mut String) {
+    // Remove the cursor
+    text.pop();
+    // Delete a character
+    text.pop();
     // Add the cursor again
     text.push(CURSOR);
 }
