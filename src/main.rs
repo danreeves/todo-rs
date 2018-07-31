@@ -45,13 +45,13 @@ fn draw(terminal: &mut Terminal<RawBackend>, size: &Rect, body: &str) {
         .render(terminal, &size);
 
     Group::default()
-        .margin(2)
+        .margin(1)
         .sizes(&[Size::Percent(20), Size::Percent(80)])
         .render(terminal, &size, |t, chunks| {
             Paragraph::default()
                 .wrap(true)
                 .text(body)
-                .render(t, &chunks[0])
+                .render(t, &chunks[1])
         });
 
     terminal.draw().expect("Failed to draw");
