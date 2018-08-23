@@ -28,7 +28,5 @@ pub fn init() -> Vec<Day> {
 
     for file in files {
         let text = read_to_string(file.path());
-
     }
-
 }
