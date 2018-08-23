@@ -6,3 +6,4 @@ authors = ["Dan Reeves <hey@danreev.es>"]
 [dependencies]
 tui = "0.2.3"
 termion = "1.5.1"
+chrono = "0.4.0"
