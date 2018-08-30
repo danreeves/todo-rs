@@ -2,6 +2,7 @@
 name = "todo-rs"
 version = "0.1.0"
 authors = ["Dan Reeves <hey@danreev.es>"]
+repository = "https://github.com/danreeves/todo-rs"
 
 [dependencies]
 tui = "0.2.3"
